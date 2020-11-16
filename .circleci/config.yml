@@ -4,8 +4,11 @@ jobs:
     docker: 
       - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
         auth:
-          username: mydockerhub-user
+          username: which openssl
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
+      - run:
+          name: Check Auth List
+          command: sfdx force:auth:list
