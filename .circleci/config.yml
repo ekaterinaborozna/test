@@ -30,8 +30,12 @@ jobs:
     steps:
       - checkout
       - sfdx/install
+            - attach_workspace:
+                  at: ~/
+            - run:
+                  name: Update PATH and Define Environment Variable at Runtime
+                  command: echo 'export PATH=/home/circleci/sfdx/bin:$PATH' >> $DevHub
       - sfdx/auth:
-          context: DevHub
           defaultusername: boroznaekaterina@curiospanda.com
       - run:
           command: >
