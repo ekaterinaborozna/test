@@ -22,7 +22,7 @@ jobs:
           name: "What branch am I on now?"
           command: echo $CIRCLE_BRANCH
       - run:
-          name: "Print an SFDX_JWT_KEY var stored in a Context "
+          name: "Print an SFDX_JWT_KEY var stored in a Context"
           command: echo ${SFDX_JWT_KEY}
 
   install_authenticate:
