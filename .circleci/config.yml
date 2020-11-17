@@ -21,20 +21,8 @@ jobs:
           command: echo ${SFDX_JWT_KEY}
 
   install_authenticate:
-      environment:
-    # from https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli_standalone.htm
-    # and https://developer.salesforce.com/media/salesforce-cli/manifest.json
-    DX_CLI_URL: https://developer.salesforce.com/media/salesforce-cli/sfdx-v5.7.6-d42cf65-linux-amd64.tar.xz
-    SFDX_DISABLE_ENCRYPTION: true
-    
-    executor: sfdx/default
-    steps:
-      - checkout
-      - sfdx/install
-      - sfdx/auth:
-          defaultusername: boroznaekaterina@curiospanda.com
-          jwtKey: SFDX_JWT_KEY
-          defaultdevhubusername: boroznaekaterina@curiospanda.com
+  before_script:
+   - sfdx force:auth:jwt:grant --clientid $SFDX_CONSUMER_KEY --jwtkeyfile server.key --username boroznaekaterina@curiospanda.com --setdefaultdevhubusername 
       - run:
           command: >
             echo You now have access to the sfdx cli and may execute commands
