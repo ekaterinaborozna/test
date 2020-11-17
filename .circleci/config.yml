@@ -31,6 +31,7 @@ jobs:
       - checkout
       - sfdx/install
       - sfdx/auth:
+          context: DevHub
           defaultusername: boroznaekaterina@curiospanda.com
       - run:
           command: >
@@ -48,4 +49,4 @@ workflows:
       - build:
           context: DevHub
       - install_authenticate:
-          context: DevHub
+          
