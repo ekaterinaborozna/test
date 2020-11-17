@@ -1,11 +1,6 @@
 jobs:
   build: 
-    docker: # use the Docker executor
-      # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
-      - image: circleci/node:10.0-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    executor: my-executor
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
       # Run a step to setup an environment variable
@@ -30,11 +25,6 @@ jobs:
     steps:
       - checkout
       - sfdx/install
-            - attach_workspace:
-                  at: ~/
-            - run:
-                  name: Update PATH and Define Environment Variable at Runtime
-                  command: echo 'export PATH=/home/circleci/sfdx/bin:$PATH' >> $DevHub
       - sfdx/auth:
           defaultusername: boroznaekaterina@curiospanda.com
       - run:
@@ -52,5 +42,14 @@ workflows:
     jobs:
       - build:
           context: DevHub
-      - install_authenticate:
+      - install_authenticate
+
+executors:
+  my-executor:
+    docker: # use the Docker executor
+      # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
+      - image: circleci/node:10.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
           
