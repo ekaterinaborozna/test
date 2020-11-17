@@ -27,10 +27,6 @@ jobs:
 
   install_authenticate:
     executor: sfdx/default
-    
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - sfdx/install
@@ -51,4 +47,5 @@ workflows:
     jobs:
       - build:
           context: DevHub
-      - install_authenticate
+      - install_authenticate:
+          context: DevHub
