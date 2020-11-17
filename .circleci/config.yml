@@ -28,6 +28,7 @@ jobs:
       - sfdx/auth:
           defaultusername: boroznaekaterina@curiospanda.com
           jwtKey: SFDX_JWT_KEY
+          defaultdevhubusername: boroznaekaterina@curiospanda.com
       - run:
           command: >
             echo You now have access to the sfdx cli and may execute commands
