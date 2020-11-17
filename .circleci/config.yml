@@ -9,7 +9,7 @@ jobs:
       - run:
           command: >
             echo You now have access to the sfdx cli and may execute commands
-            against it.
+            against it
 
             sfdx force:auth:list
           name: Run your SFDX commands here
