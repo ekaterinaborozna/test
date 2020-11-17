@@ -28,9 +28,6 @@ jobs:
   install_authenticate:
     executor: sfdx/default
     
-        docker: # use the Docker executor
-      # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
-      - image: circleci/node:10.0-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
