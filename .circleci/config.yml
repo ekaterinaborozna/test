@@ -29,7 +29,7 @@ jobs:
           defaultusername: boroznaekaterina@curiospanda.com
       - run:
           command: >
-            echo you now have access to the sfdx cli and may execute commands
+            echo You now have access to the sfdx cli and may execute commands
             against it
 
             sfdx force:auth:list
