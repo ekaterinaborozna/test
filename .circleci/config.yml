@@ -28,8 +28,7 @@ jobs:
                   - run:
                   name: Update PATH and Define Environment Variable at Runtime
                   command: echo 'export PATH=/home/circleci/sfdx/bin:$PATH' >> $DevHub
-      - sfdx/auth:
-          defaultusername: boroznaekaterina@curiospanda.com
+
       - run:
           command: >
             echo you now have access to the sfdx cli and may execute commands
