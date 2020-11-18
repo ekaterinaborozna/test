@@ -1,11 +1,58 @@
-version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/node:latest
+  build: 
+    executor: my-executor
+    steps: # steps that comprise the `build` job
+      - checkout # check out source code to working directory
+      # Run a step to setup an environment variable
+      # Redirect MY_ENV_VAR into $BASH_ENV
+      - run: 
+          name: "Setup custom environment variables"
+          command: echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
+      - run: # print the name of the branch we're on
+          name: "What branch am I on?"
+          command: echo ${CIRCLE_BRANCH}
+      # Run another step, the same as above; note that you can
+      # invoke environment variable without curly braces.
+      - run:
+          name: "What branch am I on now?"
+          command: echo $CIRCLE_BRANCH
+      - run:
+          name: "Print an SFDX_JWT_KEY var stored in a Context "
+          command: echo ${SFDX_JWT_KEY}
 
-          steps:
-            - checkout
-            - restore_cache:
-                keys:
-                    - sfdx-version-41-local
+  install_authenticate:
+    executor: sfdx/default
+    steps:
+      - checkout
+      - sfdx/install
+                  - run:
+                  name: Update PATH and Define Environment Variable at Runtime
+                  command: echo 'export PATH=/home/circleci/sfdx/bin:$PATH' >> $DevHub
+      - sfdx/auth:
+          defaultusername: boroznaekaterina@curiospanda.com
+      - run:
+          command: >
+            echo you now have access to the sfdx cli and may execute commands
+            against it
+
+            sfdx force:auth:list
+          name: Run your SFDX commands here
+orbs:
+  sfdx: circleci/salesforce-sfdx@2.1.0
+version: 2.1
+workflows:
+  basic-test:
+    jobs:
+      - build:
+          context: DevHub
+      - install_authenticate
+
+executors:
+  my-executor:
+    docker: # use the Docker executor
+      # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
+      - image: circleci/node:10.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          
