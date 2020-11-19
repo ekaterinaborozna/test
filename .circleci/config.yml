@@ -6,10 +6,10 @@ jobs:
       - checkout
       - sfdx/install
       - sfdx/auth:
-          defaultusername: ekaterinaborozna@circleci.cpe
+          defaultusername: boroznaekaterina@curiospanda.com
       - run:
           command: >
-            echo You now have access to the sfdx cli and may execute commands
+            echo Younow have access to the sfdx cli and may execute commands
             against it.
 
             sfdx force:auth:list
