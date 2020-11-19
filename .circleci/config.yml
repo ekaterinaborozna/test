@@ -5,7 +5,7 @@ jobs:
       - checkout
       - sfdx/install
       - sfdx/auth:
-          defaultusername: user@email.com
+          defaultusername: boroznaekaterina@curiospanda.com
           environment:
           SFDX_JWT_KEY: MI
       - run:
@@ -16,7 +16,7 @@ jobs:
             sfdx force:auth:list
           name: Run your SFDX commands here
 orbs:
-  sfdx: circleci/salesforce-sfdx@x.y
+  sfdx: circleci/salesforce-sfdx@2.1.0
 version: 2.1
 workflows:
   basic-test:
