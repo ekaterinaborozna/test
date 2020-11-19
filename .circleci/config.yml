@@ -7,8 +7,6 @@ jobs:
       - sfdx/install
       - sfdx/auth:
           defaultusername: boroznaekaterina@curiospanda.com
-        environment:
-          SFDX_JWT_KEY: my-value-1
       - run:
           command: >
             echo You now have access to the sfdx cli and may execute commands
