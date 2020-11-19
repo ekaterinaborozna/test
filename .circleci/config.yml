@@ -1,7 +1,7 @@
 jobs:
   install_authenticate:
     executor: sfdx/default
-    working_directory: ~/test
+    working_directory: ~/project
     steps:
       - checkout
       - sfdx/install
